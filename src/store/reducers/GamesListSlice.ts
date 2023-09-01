@@ -1,7 +1,6 @@
-import {IGame} from "../../types/IGame.ts";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {fetchGames} from "./ActionCreators.ts";
-
+import { IGame } from "../../types/IGame.ts";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchGames } from "./ActionCreators.ts";
 
 interface GameState {
   games: IGame[];
@@ -25,7 +24,7 @@ export const gameSlice = createSlice({
     },
     [fetchGames.fulfilled.type]: (state, action: PayloadAction<IGame[]>) => {
       state.isLoading = false;
-      state.error = '';
+      state.error = "";
       state.games = action.payload;
     },
     [fetchGames.rejected.type]: (state, action: PayloadAction<string>) => {
