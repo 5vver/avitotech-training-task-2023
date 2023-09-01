@@ -1,7 +1,7 @@
 import { IApiError } from "../types/IApi.ts";
 import axios from "axios";
 
-const RAPID_API_URL = process.env.REACT_APP_RAPID_API_URL;
+const RAPID_API_URL = import.meta.env.VITE_RAPID_API_URL;
 
 export const API = axios.create({
   baseURL: RAPID_API_URL,

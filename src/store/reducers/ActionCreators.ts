@@ -4,12 +4,12 @@ import { API } from "../../api/utils.ts";
 
 const options = {
   method: "GET",
-  url: `${process.env.REACT_APP_RAPID_API_URL}/games`,
+  url: `${import.meta.env.VITE_RAPID_API_URL}/games`,
   params: {
     category: "anime",
   },
   headers: {
-    "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
+    "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
     "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com",
   },
 };
