@@ -1,32 +1,25 @@
-import axios from "axios";
 import { IGame } from "../../types/IGame.ts";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { API } from "../../api/utils.ts";
 
 const options = {
   method: "GET",
-  url: "https://free-to-play-games-database.p.rapidapi.com/api/games",
+  url: `${process.env.REACT_APP_RAPID_API_URL}/games`,
   params: {
     category: "anime",
   },
   headers: {
-    "X-RapidAPI-Key": "a0abc65a3amshc41ebf89321094dp1d0cdajsn53a4b0b37ab6",
+    "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
     "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com",
   },
 };
-
-try {
-  const response = await axios.request(options);
-  console.log(response.data);
-} catch (error) {
-  console.error(error);
-}
 
 export const fetchGames = createAsyncThunk(
   "games/fetchAll",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.request<IGame[]>(options);
-      return response.data;
+      const { data } = await API.request<IGame[]>(options);
+      return data;
     } catch (e) {
       return thunkAPI.rejectWithValue("Something went wrong :o");
     }
