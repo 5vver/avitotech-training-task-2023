@@ -23,3 +23,13 @@ export type AxiosResponse<T> = {
 export interface IApiError<T> extends IErrorBase<T> {
   response: AxiosErrorResponse<T>;
 }
+export type RequestParams = {
+  tag: string;
+  id: string;
+  platform: Platform;
+  category: Category;
+  sortBy: SortBy;
+};
+type Category = "3d" | "mmorpg" | "fantasy" | "pvp" | "shooter" | "anime";
+type Platform = "pc" | "browser";
+type SortBy = "release-date" | "alphabetical";

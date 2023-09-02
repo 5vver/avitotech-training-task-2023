@@ -1,27 +1,37 @@
 import { IGame } from "../../types/IGame.ts";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "../../api/utils.ts";
-
-const options = {
-  method: "GET",
-  url: `${import.meta.env.VITE_RAPID_API_URL}/games`,
-  params: {
-    category: "anime",
-  },
-  headers: {
-    "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
-    "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com",
-  },
-};
+import { createReqOptions } from "../../api/apiRequestOptions.ts";
 
 export const fetchGames = createAsyncThunk(
   "games/fetchAll",
   async (_, thunkAPI) => {
     try {
-      const { data } = await API.request<IGame[]>(options);
+      const { data } = await API.request<IGame[]>(createReqOptions("games"));
       return data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue("Something went wrong :o");
+    } catch (e: unknown) {
+      if (e instanceof Error)
+        return thunkAPI.rejectWithValue(
+          `API request error has occurred with the message: ${e.message}`,
+        );
+      return thunkAPI.rejectWithValue(e);
+    }
+  },
+);
+export const fetchGameByID = createAsyncThunk(
+  "games/fetchGame",
+  async (id: string = "", thunkAPI) => {
+    try {
+      const { data } = await API.request<IGame>(
+        createReqOptions("game", { id }),
+      );
+      return data;
+    } catch (e: unknown) {
+      if (e instanceof Error)
+        return thunkAPI.rejectWithValue(
+          `API request error has occurred with the message: ${e.message}`,
+        );
+      return thunkAPI.rejectWithValue(e);
     }
   },
 );
