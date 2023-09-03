@@ -1,9 +1,9 @@
 import {
   useAppDispatch,
   useAppSelector,
-} from "../../store/customHooks/redux.ts";
+} from "@store/customHooks/redux.ts";
 import { useEffect } from "react";
-import { fetchGames, fetchFilterGames, fetchGame } from "../../store/reducers/ActionCreators.ts";
+import { fetchGames, fetchFilterGames, fetchGame } from "@store/reducers/ActionCreators.ts";
 
 function GamesOverview() {
   const dispatch = useAppDispatch();

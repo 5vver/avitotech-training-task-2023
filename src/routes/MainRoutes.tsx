@@ -1,4 +1,4 @@
-import GamesOverview from "../pages/main/GamesOverview.tsx";
+import GamesOverview from "@pages/main/GamesOverview.tsx";
 import { RouteObject } from "react-router-dom";
 
 const MainRoutes: RouteObject = {
