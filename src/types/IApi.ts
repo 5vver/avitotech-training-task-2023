@@ -33,3 +33,7 @@ export type RequestParams = {
 type Category = "3d" | "mmorpg" | "fantasy" | "pvp" | "shooter" | "anime";
 type Platform = "pc" | "browser";
 type SortBy = "release-date" | "alphabetical";
+
+export type payloadCreatorParams = {
+  id: string;
+};

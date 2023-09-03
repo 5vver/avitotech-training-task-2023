@@ -1,12 +1,17 @@
 import { IGame } from "../../types/IGame.ts";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchGameByID, fetchGames } from "./ActionCreators.ts";
+import { fetchFilterGames, fetchGame, fetchGames } from "./ActionCreators.ts";
+import {
+  isFulfilledAction,
+  isPendingAction,
+  isRejectedAction,
+} from "../utils/builderMatchers.ts";
 
-interface GameState {
+type GameState = {
   games: IGame[];
   isLoading: boolean;
   error: string;
-}
+};
 
 const initialState: GameState = {
   games: [],
@@ -18,23 +23,46 @@ export const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchGames.pending.type]: (state) => {
-      state.isLoading = true;
-    },
-    [fetchGames.fulfilled.type]: (state, action: PayloadAction<IGame[]>) => {
-      state.isLoading = false;
-      state.error = "";
-      state.games = action.payload;
-    },
-    [fetchGames.rejected.type]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    [fetchGameByID.fulfilled.type]: (state, action: PayloadAction<IGame>) => {
-      state.isLoading = false;
-      state.games.push(action.payload);
-    },
+  extraReducers: (builder) => {
+    builder
+      /* Fetch all games actionCreator **/
+      .addCase(
+        fetchGames.fulfilled,
+        (state, action: PayloadAction<IGame[]>) => {
+          state.isLoading = false;
+          state.error = "";
+          state.games = action.payload;
+        },
+      )
+      /* Fetch one game actionCreator **/
+      .addCase(fetchGame.fulfilled, (state, action: PayloadAction<IGame>) => {
+        state.isLoading = false;
+        state.error = "";
+        state.games = [action.payload];
+      })
+      /* Fetch filtered games actionCreator **/
+      .addCase(
+        fetchFilterGames.fulfilled,
+        (state, action: PayloadAction<IGame[]>) => {
+          state.isLoading = false;
+          state.error = "";
+          state.games = action.payload;
+        },
+      )
+      /* Game builder matchers **/
+      .addMatcher(isPendingAction("game"), (state) => {
+        state.isLoading = true;
+        state.error = "";
+      })
+      .addMatcher(isRejectedAction("game"), (state, action) => {
+        console.log("rejected");
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addMatcher(isFulfilledAction("game"), (state) => {
+        state.isLoading = false;
+        state.error = "";
+      });
   },
 });
 

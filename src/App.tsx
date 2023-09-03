@@ -1,6 +1,10 @@
 import { useAppDispatch, useAppSelector } from "./store/customHooks/redux.ts";
 import { useEffect } from "react";
-import { fetchGameByID, fetchGames } from "./store/reducers/ActionCreators.ts";
+import {
+  fetchFilterGames,
+  fetchGame,
+  fetchGames,
+} from "./store/reducers/ActionCreators.ts";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -9,8 +13,9 @@ function App() {
   );
 
   useEffect(() => {
-    dispatch(fetchGames());
+    // dispatch(fetchGames({}));
     // dispatch(fetchGameByID("452"));
+    dispatch(fetchFilterGames({ tag: "anime", platform: "pc" }));
   }, [dispatch]);
 
   return (
