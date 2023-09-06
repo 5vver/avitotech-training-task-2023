@@ -1,8 +1,8 @@
-import GamesOverview from "@pages/main/GamesOverview.tsx";
+import GamesDisplay from "@pages/main/GamesDisplay.tsx";
 import { RouteObject } from "react-router-dom";
 
 import MainLayout from "@layout/MainLayout";
-import GameDisplay from "@pages/game/GameDisplay.tsx";
+import GamePage from "@pages/game/GamePage.tsx";
 
 const MainRoutes: RouteObject = {
   path: "/",
@@ -10,11 +10,11 @@ const MainRoutes: RouteObject = {
   children: [
     {
       path: "/",
-      element: <GamesOverview />
+      element: <GamesDisplay />
     },
     {
       path: ":id",
-      element: <GameDisplay />
+      element: <GamePage />
     },
   ],
 };

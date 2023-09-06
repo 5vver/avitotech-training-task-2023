@@ -48,7 +48,3 @@ type Category =
 
 type Platform = "pc" | "browser";
 type SortBy = "release-date" | "alphabetical";
-
-export type payloadCreatorParams = {
-  id: string;
-};

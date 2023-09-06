@@ -1,14 +1,9 @@
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "@store/customHooks/redux.ts";
-import { useEffect, Fragment } from "react";
-import { fetchGames, fetchFilterGames, fetchGame } from "@store/reducers/ActionCreators.ts";
+import { useAppDispatch, useAppSelector } from "@store/customHooks/redux.ts";
+import { Fragment, useEffect } from "react";
+import { fetchFilterGames } from "@store/reducers/ActionCreators.ts";
+import { Link } from "react-router-dom";
 
-import MainLayout from "@layout/MainLayout"
-import {Link} from "react-router-dom";
-
-function GamesOverview() {
+function GamesDisplay() {
   const dispatch = useAppDispatch();
   const { games, isLoading, error } = useAppSelector(
     (state) => state.gameReducer,
@@ -27,13 +22,11 @@ function GamesOverview() {
       {games.map((game) => (
         <Fragment key={game.id}>
           <h1>{game.title}</h1>
-          <Link to={`:${game.id}`}>
-            Link to game
-          </Link>
+          <Link to={`:${game.id}`}>Link to game</Link>
         </Fragment>
       ))}
     </div>
   );
 }
 
-export default GamesOverview;
+export default GamesDisplay;
