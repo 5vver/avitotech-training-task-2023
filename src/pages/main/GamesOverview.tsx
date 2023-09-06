@@ -2,8 +2,11 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "@store/customHooks/redux.ts";
-import { useEffect } from "react";
+import { useEffect, Fragment } from "react";
 import { fetchGames, fetchFilterGames, fetchGame } from "@store/reducers/ActionCreators.ts";
+
+import MainLayout from "@layout/MainLayout"
+import {Link} from "react-router-dom";
 
 function GamesOverview() {
   const dispatch = useAppDispatch();
@@ -22,7 +25,12 @@ function GamesOverview() {
       {isLoading && "Page is loading... Please stand by."}
       {error && <h1>Error occurred: {error}</h1>}
       {games.map((game) => (
-        <h1 key={game.id}>{game.title}</h1>
+        <Fragment key={game.id}>
+          <h1>{game.title}</h1>
+          <Link to={`:${game.id}`}>
+            Link to game
+          </Link>
+        </Fragment>
       ))}
     </div>
   );

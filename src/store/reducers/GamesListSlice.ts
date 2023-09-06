@@ -1,4 +1,4 @@
-import { IGame } from "@CustomTypes/IGame.ts";
+import { Game } from "@CustomTypes/Game.ts";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchFilterGames, fetchGame, fetchGames } from "./ActionCreators.ts";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../utils/builderMatchers.ts";
 
 type GameState = {
-  games: IGame[];
+  games: Game[];
   isLoading: boolean;
   error: string;
 };
@@ -28,14 +28,14 @@ export const gameSlice = createSlice({
       /* Fetch all games actionCreator **/
       .addCase(
         fetchGames.fulfilled,
-        (state, action: PayloadAction<IGame[]>) => {
+        (state, action: PayloadAction<Game[]>) => {
           state.isLoading = false;
           state.error = "";
           state.games = action.payload;
         },
       )
       /* Fetch one game actionCreator **/
-      .addCase(fetchGame.fulfilled, (state, action: PayloadAction<IGame>) => {
+      .addCase(fetchGame.fulfilled, (state, action: PayloadAction<Game>) => {
         state.isLoading = false;
         state.error = "";
         state.games = [action.payload];
@@ -43,7 +43,7 @@ export const gameSlice = createSlice({
       /* Fetch filtered games actionCreator **/
       .addCase(
         fetchFilterGames.fulfilled,
-        (state, action: PayloadAction<IGame[]>) => {
+        (state, action: PayloadAction<Game[]>) => {
           state.isLoading = false;
           state.error = "";
           state.games = action.payload;

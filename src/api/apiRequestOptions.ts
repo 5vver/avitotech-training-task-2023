@@ -1,4 +1,4 @@
-import { RequestParams } from "@CustomTypes/IApi.ts";
+import { RequestParams } from "@src/types/Api.ts";
 
 export const createReqOptions = (
   path: string,
