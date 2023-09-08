@@ -1,12 +1,8 @@
-import { IGame } from "../../types/IGame.ts";
-import {
-  AsyncThunkOptions,
-  AsyncThunkPayloadCreator,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
-import { API } from "../../api/utils.ts";
-import { createReqOptions } from "../../api/apiRequestOptions.ts";
-import { payloadCreatorParams, RequestParams } from "../../types/IApi.ts";
+import { IGame } from "@CustomTypes/IGame.ts";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { API } from "@api/utils.ts";
+import { createReqOptions } from "@api/apiRequestOptions.ts";
+import { RequestParams } from "@CustomTypes/Api.ts";
 import { AxiosError } from "axios";
 
 export const fetchGames = createAsyncThunk(

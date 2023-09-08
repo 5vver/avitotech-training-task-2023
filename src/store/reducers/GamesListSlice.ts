@@ -1,4 +1,4 @@
-import { IGame } from "../../types/IGame.ts";
+import { IGame } from "@CustomTypes/IGame.ts";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchFilterGames, fetchGame, fetchGames } from "./ActionCreators.ts";
 import {

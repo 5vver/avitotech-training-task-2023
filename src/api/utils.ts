@@ -1,4 +1,4 @@
-import { IApiError } from "../types/IApi.ts";
+import { IApiError } from "@CustomTypes/Api.ts";
 import axios from "axios";
 
 const RAPID_API_URL = import.meta.env.VITE_RAPID_API_URL;

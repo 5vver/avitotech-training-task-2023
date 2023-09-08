@@ -30,10 +30,21 @@ export type RequestParams = {
   category: Category;
   sortBy: SortBy;
 };
-type Category = "3d" | "mmorpg" | "fantasy" | "pvp" | "shooter" | "anime";
+type Category =
+  | "3d"
+  | "mmorpg"
+  | "mmo"
+  | "fantasy"
+  | "pve"
+  | "pvp"
+  | "shooter"
+  | "anime"
+  | "strategy"
+  | "moba"
+  | "racing"
+  | "sports"
+  | "social"
+  | "fighting";
+
 type Platform = "pc" | "browser";
 type SortBy = "release-date" | "alphabetical";
-
-export type payloadCreatorParams = {
-  id: string;
-};
