@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@store/customHooks/redux.ts";
-import { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { fetchFilterGames } from "@store/reducers/ActionCreators.ts";
-import { Link } from "react-router-dom";
+import GameCard from "@/components/GameCard.tsx";
 
 function GamesDisplay() {
   const dispatch = useAppDispatch();
@@ -16,15 +16,14 @@ function GamesDisplay() {
   }, [dispatch]);
 
   return (
-    <div>
-      {isLoading && "Page is loading... Please stand by."}
-      {error && <h1>Error occurred: {error}</h1>}
-      {games.map((game) => (
-        <Fragment key={game.id}>
-          <h1>{game.title}</h1>
-          <Link to={`:${game.id}`}>Link to game</Link>
-        </Fragment>
-      ))}
+    <div className="mx-5 my-5">
+      <div className="flex flex-wrap gap-5 justify-start">
+        {isLoading && "Page is loading... Please stand by."}
+        {error && <h1>Error occurred: {error}</h1>}
+        {games.map((game) => (
+          <GameCard key={game.id} gameInfo={game} />
+        ))}
+      </div>
     </div>
   );
 }

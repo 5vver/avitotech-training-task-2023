@@ -21,20 +21,21 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Absolute paths */
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@src/*": ["/*"],
-      "@store/*": ["store/*"],
-      "@CustomTypes/*": ["types/*"],
-      "@api/*": ["api/*"],
-      "@layout/*": ["layout/*"],
-      "@pages/*": ["pages/*"],
-      "@routes/*": ["routes/*"]
-    },
+      "@/*": ["./src/*"],
+//      "@components/*" : ["./src/components/*"],
+      "@store/*": ["./src/store/*"],
+      "@CustomTypes/*": ["./src/types/*"],
+      "@api/*": ["./src/api/*"],
+      "@layout/*": ["./src/layout/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@routes/*": ["./src/routes/*"],
+    }
   },
-  "include": ["src"],
+//  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "rules": {
-    "no-unused-vars": "off",
-  },
+    "no-unused-vars": "off"
+  }
 }
