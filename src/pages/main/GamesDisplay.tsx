@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@store/customHooks/redux.ts";
 import React, { useEffect } from "react";
 import { fetchFilterGames } from "@store/reducers/ActionCreators.ts";
-import GameCard from "@/components/GameCard.tsx";
+import GameCard from "@/components/card/GameCard.tsx";
 
 function GamesDisplay() {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ function GamesDisplay() {
 
   return (
     <div className="mx-5 my-5">
-      <div className="flex flex-wrap gap-5 justify-start">
+      <div className="flex flex-wrap gap-5 justify-center">
         {isLoading && "Page is loading... Please stand by."}
         {error && <h1>Error occurred: {error}</h1>}
         {games.map((game) => (
