@@ -8,12 +8,14 @@ import {
 } from "../utils/builderMatchers.ts";
 
 type GameState = {
+  current: IGame | null;
   games: IGame[];
   isLoading: boolean;
   error: string;
 };
 
 const initialState: GameState = {
+  current: null,
   games: [],
   isLoading: false,
   error: "",
@@ -22,7 +24,12 @@ const initialState: GameState = {
 export const gameSlice = createSlice({
   name: "game",
   initialState,
-  reducers: {},
+  reducers: {
+    /** Reset current selected game */
+    invalidateCurrent: (state) => {
+      state.current = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       /* Fetch all games actionCreator **/
@@ -38,7 +45,7 @@ export const gameSlice = createSlice({
       .addCase(fetchGame.fulfilled, (state, action: PayloadAction<IGame>) => {
         state.isLoading = false;
         state.error = "";
-        state.games = [action.payload];
+        state.current = action.payload;
       })
       /* Fetch filtered games actionCreator **/
       .addCase(
@@ -66,4 +73,5 @@ export const gameSlice = createSlice({
   },
 });
 
+export const { invalidateCurrent } = gameSlice.actions;
 export default gameSlice.reducer;

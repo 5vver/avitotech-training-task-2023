@@ -1,48 +1,52 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@store/customHooks/redux.ts";
 import { fetchGame } from "@store/reducers/ActionCreators.ts";
+import { invalidateCurrent } from "@store/reducers/GamesListSlice.ts";
 
-const GamePage = () => {
+const GamePage: FC = () => {
   const dispatch = useAppDispatch();
-  const { games, isLoading, error } = useAppSelector(
-    (state) => state.gameReducer,
-  );
+  const {
+    current: game,
+    isLoading,
+    error,
+  } = useAppSelector((state) => state.gameReducer);
 
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (id) dispatch(fetchGame({ id }));
+    return () => {
+      dispatch(invalidateCurrent());
+    };
   }, [dispatch, id]);
 
   return (
     <div>
       {isLoading && <>Loading</>}
-      {games.length && id ? (
+      {game && id && (
         <>
-          <span>GAME {`№${games[0].id}`}</span>
+          <span>GAME {`№${game.id}`}</span>
           <br />
-          <span>{games[0].title}</span>
+          <span>{game.title}</span>
           <br />
-          <span>{games[0].thumbnail}</span>
+          <span>{game.thumbnail}</span>
           <br />
-          <span>{games[0].short_description}</span>
+          <span>{game.short_description}</span>
           <br />
-          <span>{games[0].game_url}</span>
+          <span>{game.game_url}</span>
           <br />
-          <span>{games[0].genre}</span>
+          <span>{game.genre}</span>
           <br />
-          <span>{games[0].publisher}</span>
+          <span>{game.publisher}</span>
           <br />
-          <span>{games[0].release_date}</span>
+          <span>{game.release_date}</span>
           <br />
-          <span>{games[0].freetogame_profile_url}</span>
+          <span>{game.freetogame_profile_url}</span>
           <br />
           <button onClick={() => navigate(-1)}>GO BACK</button>
         </>
-      ) : (
-        <>Not found.</>
       )}
     </div>
   );
