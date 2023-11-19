@@ -2,7 +2,7 @@ import { Children, FC, ReactNode } from "react";
 
 export type BulletListProps = {
   children: ReactNode;
-  bulletColor?: "bg-sky-500" | "bg-emerald-500";
+  bulletColor?: string | "bg-sky-500" | "bg-emerald-500";
 };
 
 const BulletList: FC<BulletListProps> = ({

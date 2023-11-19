@@ -55,7 +55,7 @@ export const gameSlice = createSlice({
         state.error = "";
       })
       .addMatcher(isRejectedAction("game"), (state, action) => {
-        console.log("rejected");
+        console.error("rejected");
         state.isLoading = false;
         state.error = action.payload;
       })

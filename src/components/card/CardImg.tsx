@@ -1,4 +1,4 @@
-import {FC} from "react";
+import { FC } from "react";
 import { cn } from "@/lib/utils.ts";
 
 export type CardImgProps = {
@@ -6,7 +6,11 @@ export type CardImgProps = {
   className?: string | undefined;
 };
 
-const CardImg: FC<CardImgProps> = ({ className, url, ...props }: CardImgProps) => (
+const CardImg: FC<CardImgProps> = ({
+  className,
+  url,
+  ...props
+}: CardImgProps) => (
   <div
     className={cn(
       "relative top-0 left-0 w-full h-40 bg-contain bg-no-repeat rounded-lg bg-[center_top_1rem] opacity-90",
