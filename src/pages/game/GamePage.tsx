@@ -1,13 +1,17 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@store/customHooks/redux.ts";
 import { fetchGame } from "@store/reducers/ActionCreators.ts";
-import { invalidateCurrent } from "@store/reducers/GamesListSlice.ts";
+import {
+  invalidateCurrent,
+  setCurrent,
+} from "@store/reducers/GamesListSlice.ts";
 
 const GamePage: FC = () => {
   const dispatch = useAppDispatch();
   const {
     current: game,
+    games,
     isLoading,
     error,
   } = useAppSelector((state) => state.gameReducer);
@@ -15,12 +19,18 @@ const GamePage: FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const parseGame = useCallback((id: string) => {
+    const foundGame = games.find((game) => game.id === id);
+    if (foundGame) dispatch(setCurrent(foundGame));
+    else dispatch(fetchGame({ id }));
+  }, [dispatch, games]);
+
   useEffect(() => {
-    if (id) dispatch(fetchGame({ id }));
+    if (id) parseGame(id);
     return () => {
       dispatch(invalidateCurrent());
     };
-  }, [dispatch, id]);
+  }, [dispatch, parseGame, id]);
 
   return (
     <div>

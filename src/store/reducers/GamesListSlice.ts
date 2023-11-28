@@ -29,6 +29,10 @@ export const gameSlice = createSlice({
     invalidateCurrent: (state) => {
       state.current = null;
     },
+    /** Sets current game */
+    setCurrent: (state, action: PayloadAction<IGame>) => {
+      state.current = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -73,5 +77,5 @@ export const gameSlice = createSlice({
   },
 });
 
-export const { invalidateCurrent } = gameSlice.actions;
+export const { invalidateCurrent, setCurrent } = gameSlice.actions;
 export default gameSlice.reducer;
