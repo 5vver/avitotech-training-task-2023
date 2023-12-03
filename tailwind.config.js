@@ -70,6 +70,12 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      gridRow: {
+        "span-7": "span 7 / span 7",
+        "span-8": "span 8 / span 8",
+        "span-9": "span 9 / span 9",
+        "span-10": "span 10 / span 10",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
